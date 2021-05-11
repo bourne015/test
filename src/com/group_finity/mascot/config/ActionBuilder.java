@@ -40,47 +40,47 @@ public class ActionBuilder implements IActionBuilder {
 	private final List<IActionBuilder> actionRefs = new ArrayList<IActionBuilder>();
 
 	public ActionBuilder(final Configuration configuration, final Entry actionNode) throws IOException {
-		this.name = actionNode.getAttribute("名前");
-		this.type = actionNode.getAttribute("種類");
-		this.className = actionNode.getAttribute("クラス");
+		this.name = actionNode.getAttribute("Name");
+		this.type = actionNode.getAttribute("Type");
+		this.className = actionNode.getAttribute("Class");
 
-		log.log(Level.INFO, "動作読み込み開始({0})", this);
+		log.log(Level.INFO, "Read Start Operation({0})", this);
 
 		this.getParams().putAll(actionNode.getAttributes());
-		for (final Entry node : actionNode.selectChildren("アニメーション")) {
+		for (final Entry node : actionNode.selectChildren("Animation")) {
 			this.getAnimationBuilders().add(new AnimationBuilder(node));
 		}
 
 		for (final Entry node : actionNode.getChildren()) {
-			if (node.getName().equals("動作参照")) {
+			if (node.getName().equals("ActionReference")) {
 				this.getActionRefs().add(new ActionRef(configuration, node));
-			} else if (node.getName().equals("動作")) {
+			} else if (node.getName().equals("Action")) {
 				this.getActionRefs().add(new ActionBuilder(configuration, node));
 			}
 		}
 
-		log.log(Level.INFO, "動作読み込み完了");
+		log.log(Level.INFO, "Actions Finished Loading");
 	}
 
 	@Override
 	public String toString() {
-		return "動作(" + getName() + "," + getType() + "," + getClassName() + ")";
+		return "Action(" + getName() + "," + getType() + "," + getClassName() + ")";
 	}
 
 	@SuppressWarnings("unchecked")
 	public Action buildAction(final Map<String, String> params) throws ActionInstantiationException {
 
 		try {
-			// 変数マップを生成
+			// Create Variable Map
 			final VariableMap variables = createVariables(params);
 
-			// アニメーションを生成
+			// Create Animations
 			final List<Animation> animations = createAnimations();
 
-			// 子アクションを生成
+			// Create Child Actions
 			final List<Action> actions = createActions();
 
-			if (this.type.equals("組み込み")) {
+			if (this.type.equals("Embedded")) {
 				try {
 					final Class<? extends Action> cls = (Class<? extends Action>) Class.forName(this.getClassName());
 					try {
@@ -88,41 +88,41 @@ public class ActionBuilder implements IActionBuilder {
 						try {
 							return cls.getConstructor(List.class, VariableMap.class).newInstance(animations, variables);
 						} catch (final Exception e) {
-							// NOTE コンストラクタが無かったと思われるので次へ
+							// NOTE There's no constructor
 						}
 
 						return cls.getConstructor(VariableMap.class).newInstance(variables);
 					} catch (final Exception e) {
-						// NOTE コンストラクタが無かったと思われるので次へ
+						// NOTE There's no constructor
 					}
 
 					return cls.newInstance();
 				} catch (final InstantiationException e) {
-					throw new ActionInstantiationException("動作クラスの初期化に失敗(" + this + ")", e);
+					throw new ActionInstantiationException("Failed to initialize the class action(" + this + ")", e);
 				} catch (final IllegalAccessException e) {
-					throw new ActionInstantiationException("動作クラスにアクセスできません(" + this + ")", e);
+					throw new ActionInstantiationException("Can not access the class action(" + this + ")", e);
 				} catch (final ClassNotFoundException e) {
-					throw new ActionInstantiationException("動作クラスが見つかりません(" + this + ")", e);
+					throw new ActionInstantiationException("Class not found work(" + this + ")", e);
 				}
 
-			} else if (this.type.equals("移動")) {
+			} else if (this.type.equals("Move")) {
 				return new Move(animations, variables);
-			} else if (this.type.equals("静止")) {
+			} else if (this.type.equals("Stay")) {
 				return new Stay(animations, variables);
-			} else if (this.type.equals("固定")) {
+			} else if (this.type.equals("Animate")) {
 				return new Animate(animations, variables);
-			} else if (this.type.equals("複合")) {
+			} else if (this.type.equals("Sequence")) {
 				return new Sequence(variables, actions.toArray(new Action[0]));
-			} else if (this.type.equals("選択")) {
+			} else if (this.type.equals("Select")) {
 				return new Select(variables, actions.toArray(new Action[0]));
 			} else {
-				throw new ActionInstantiationException("動作の種類が不明(" + this + ")");
+				throw new ActionInstantiationException("Unknown Type of Action(" + this + ")");
 			}
 
 		} catch (final AnimationInstantiationException e) {
-			throw new ActionInstantiationException("アニメーションの作成に失敗しました(" + this + ")", e);
+			throw new ActionInstantiationException("Failed to create an animation(" + this + ")", e);
 		} catch (final VariableException e) {
-			throw new ActionInstantiationException("パラメータの評価に失敗しました(" + this + ")", e);
+			throw new ActionInstantiationException("Failed to evaluate the parameter(" + this + ")", e);
 		}
 	}
 

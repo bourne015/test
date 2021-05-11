@@ -12,18 +12,18 @@ import com.group_finity.mascot.exception.VariableException;
 import com.group_finity.mascot.script.VariableMap;
 
 /**
- * IEを持って歩くアクション.
- * @author Yuki Yamada
+ * Original Author: Yuki Yamada of Group Finity (http://www.group-finity.com/Shimeji/)
+ * Currently developed by Shimeji-ee Group.
  */
 public class WalkWithIE extends Move {
 
 	private static final Logger log = Logger.getLogger(Stay.class.getName());
 
-	public static final String PARAMETER_IEOFFSETX = "IEの端X";
+	public static final String PARAMETER_IEOFFSETX = "IeOffsetX";
 
 	private static final int DEFAULT_IEOFFSETX = 0;
 
-	public static final String PARAMETER_IEOFFSETY = "IEの端Y";
+	public static final String PARAMETER_IEOFFSETY = "IeOffsetY";
 
 	private static final int DEFAULT_IEOFFSETY = 0;
 
@@ -37,7 +37,7 @@ public class WalkWithIE extends Move {
 
 		final Area activeIE = getEnvironment().getActiveIE();
 		if (!activeIE.isVisible()) {
-			log.log(Level.INFO, "IEが非表示になった({0},{1})", new Object[]{ getMascot(), this } ); 
+			log.log(Level.INFO, "IE was hidden ({0}, {1})", new Object[]{ getMascot(), this } ); 
 			throw new LostGroundException();
 		} 
 
@@ -48,13 +48,13 @@ public class WalkWithIE extends Move {
 		if (getMascot().isLookRight()) {
 			if ((getMascot().getAnchor().x - offsetX != activeIE.getLeft())
 					|| (getMascot().getAnchor().y + offsetY != activeIE.getBottom())) {
-				log.log(Level.INFO, "IEから離れた({0},{1})", new Object[]{ getMascot(), this } ); 
+				log.log(Level.INFO, "Lost Ground ({0},{1})", new Object[]{ getMascot(), this } ); 
 				throw new LostGroundException();
 			}
 		} else {
 			if ((getMascot().getAnchor().x + offsetX != activeIE.getRight())
 					|| (getMascot().getAnchor().y + offsetY != activeIE.getBottom())) {
-				log.log(Level.INFO, "IEから離れた({0},{1})", new Object[]{ getMascot(), this } ); 
+				log.log(Level.INFO, "Lost Ground ({0},{1})", new Object[]{ getMascot(), this } ); 
 				throw new LostGroundException();
 			}
 		}

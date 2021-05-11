@@ -6,13 +6,14 @@ import com.group_finity.mascot.exception.VariableException;
 import com.group_finity.mascot.script.VariableMap;
 
 /**
- * 複数のアクションを直列に一つにまとめたアクション.
+ * Original Author: Yuki Yamada of Group Finity (http://www.group-finity.com/Shimeji/)
+ * Currently developed by Shimeji-ee Group.
  */
 public class Sequence extends ComplexAction {
 
 	private static final Logger log = Logger.getLogger(Sequence.class.getName());
 
-	public static final String PARAMETER_LOOP = "繰り返し";
+	public static final String PARAMETER_LOOP = "Loop";
 
 	private static final boolean DEFAULT_LOOP = false;
 

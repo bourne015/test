@@ -23,15 +23,15 @@ public class Breed extends Animate {
 
 	private static final Logger log = Logger.getLogger(Breed.class.getName());
 
-	public static final String PARAMETER_BORNX = "生まれる場所X";
+	public static final String PARAMETER_BORNX = "BornX";
 
 	private static final int DEFAULT_BORNX = 0;
 
-	public static final String PARAMETER_BORNY = "生まれる場所Y";
+	public static final String PARAMETER_BORNY = "BornY";
 
 	private static final int DEFAULT_BORNY = 0;
 
-	public static final String PARAMETER_BORNBEHAVIOR = "生まれた時の行動";
+	public static final String PARAMETER_BORNBEHAVIOR = "BornBehavior";
 
 	private static final String DEFAULT_BORNBEHAVIOR = "";
 

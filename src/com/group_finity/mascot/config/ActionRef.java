@@ -22,7 +22,7 @@ public class ActionRef implements IActionBuilder {
 	public ActionRef(final Configuration configuration, final Entry refNode) {
 		this.configuration = configuration;
 
-		this.name = refNode.getAttribute("名前");
+		this.name = refNode.getAttribute("Name");
 		this.getParams().putAll(refNode.getAttributes());
 		log.log(Level.INFO, "動作参照読み込み({0})", this);
 
@@ -55,7 +55,7 @@ public class ActionRef implements IActionBuilder {
 
 	@Override
 	public String toString() {
-		return "動作参照(" + getName() + ")";
+		return "Action(" + getName() + ")";
 	}
 
 	private String getName() {
@@ -73,7 +73,8 @@ public class ActionRef implements IActionBuilder {
 	@Override
 	public void validate() throws ConfigurationException {
 		if (!getConfiguration().getActionBuilders().containsKey(getName())) {
-			throw new ConfigurationException("対応する動作が存在しません(" + this + ")");
+			log.log(Level.SEVERE, "There is no corresponding behavior(" + this + ")");		
+			throw new ConfigurationException("There is no corresponding behavior(" + this + ")");
 		}
 	}
 

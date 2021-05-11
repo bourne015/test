@@ -34,24 +34,24 @@ public class Configuration {
 
 		log.log(Level.INFO, "設定読み込み開始");
 
-		for (final Entry constant : configurationNode.selectChildren("定数")) {
+		for (final Entry constant : configurationNode.selectChildren("Constant")) {
 			log.log(Level.INFO, "定数...");
-			constants.put( constant.getAttribute("名前"), constant.getAttribute("値") );
+			constants.put( constant.getAttribute("Name"), constant.getAttribute("Frequency") );
 		}
 
-		for (final Entry list : configurationNode.selectChildren("動作リスト")) {
-			log.log(Level.INFO, "動作リスト...");
-			for (final Entry node : list.selectChildren("動作")) {
+		for (final Entry list : configurationNode.selectChildren("ActionList")) {
+			log.log(Level.INFO, "ActionList...");
+			for (final Entry node : list.selectChildren("Action")) {
 				final ActionBuilder action = new ActionBuilder(this, node);
 				if ( this.getActionBuilders().containsKey(action.getName())) {
-					throw new ConfigurationException("動作の名前が重複しています:"+action.getName());
+					throw new ConfigurationException("Duplicate Action Found: "+action.getName());
 				}
 				this.getActionBuilders().put(action.getName(), action);
 			}
 		}
 
-		for (final Entry list : configurationNode.selectChildren("行動リスト")) {
-			log.log(Level.INFO, "行動リスト...");
+		for (final Entry list : configurationNode.selectChildren("BehaviorList")) {
+			log.log(Level.INFO, "Behavior List...");
 			loadBehaviors(list, new ArrayList<String>());
 		}
 		log.log(Level.INFO, "設定読み込み完了");
@@ -60,14 +60,14 @@ public class Configuration {
 
 	private void loadBehaviors(final Entry list, final List<String> conditions) {
 		for (final Entry node : list.getChildren()) {
-			if (node.getName().equals("条件")) {
+			if (node.getName().equals("Condition")) {
 
 				final List<String> newConditions = new ArrayList<String>(conditions);
-				newConditions.add(node.getAttribute("条件"));
+				newConditions.add(node.getAttribute("Condition"));
 
 				loadBehaviors(node, newConditions);
 
-			} else if (node.getName().equals("行動")) {
+			} else if (node.getName().equals("Behavior")) {
 				final BehaviorBuilder behavior = new BehaviorBuilder(this, node, conditions);
 				this.getBehaviorBuilders().put(behavior.getName(), behavior);
 			}
@@ -78,7 +78,7 @@ public class Configuration {
 
 		final ActionBuilder factory = this.actionBuilders.get(name);
 		if (factory == null) {
-			throw new ActionInstantiationException("対応する動作が見つかりません: " + name);
+			throw new ActionInstantiationException("Could not find the corresponding action: " + name);
 		}
 
 		return factory.buildAction(params);
@@ -113,7 +113,7 @@ public class Configuration {
 					totalFrequency += behaviorFactory.getFrequency();
 				}
 			} catch (final VariableException e) {
-				log.log(Level.WARNING, "行動頻度の評価中にエラーが発生しました", e);
+				log.log(Level.WARNING, "An error occurred calculating the frequency of the action", e);
 			}
 		}
 
@@ -130,7 +130,7 @@ public class Configuration {
 						totalFrequency += behaviorFactory.getFrequency();
 					}
 				} catch (final VariableException e) {
-					log.log(Level.WARNING, "行動頻度の評価中にエラーが発生しました", e);
+					log.log(Level.WARNING, "An error occurred calculating the frequency of the behavior", e);
 				}
 			}
 		}
@@ -141,7 +141,7 @@ public class Configuration {
 							- mascot.getEnvironment()
 					.getScreen().getLeft()))
 					+ mascot.getEnvironment().getScreen().getLeft(), mascot.getEnvironment().getScreen().getTop() - 256));
-			return buildBehavior("落下する");
+			return buildBehavior("Fall");
 		}
 
 		double random = Math.random() * totalFrequency;

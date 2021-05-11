@@ -37,7 +37,7 @@ public class Main {
 
 	private static final Logger log = Logger.getLogger(Main.class.getName());
 
-	static final String BEHAVIOR_GATHER = "マウスの周りに集まる";
+	static final String BEHAVIOR_GATHER = "ChaseMouse";
 
 	static {
 		try {
@@ -85,17 +85,17 @@ public class Main {
 	private void loadConfiguration() {
 
 		try {
-			log.log(Level.INFO, "設定ファイルを読み込み({0})", "/Behavior.xml");
+			log.log(Level.INFO, "設定ファイルを読み込み({0})", "/Behavior_en.xml");
 
 			final Document actions = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
-					Main.class.getResourceAsStream("/Behavior.xml"));
+					Main.class.getResourceAsStream("/Behavior_en.xml"));
 
-			log.log(Level.INFO, "設定ファイルを読み込み({0})", "/Actions.xml");
+			log.log(Level.INFO, "設定ファイルを読み込み({0})", "/Actions_en.xml");
 
 			this.getConfiguration().load(new Entry(actions.getDocumentElement()));
 
 			final Document behaviors = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
-					Main.class.getResourceAsStream("/Actions.xml"));
+					Main.class.getResourceAsStream("/Actions_en.xml"));
 
 			this.getConfiguration().load(new Entry(behaviors.getDocumentElement()));
 

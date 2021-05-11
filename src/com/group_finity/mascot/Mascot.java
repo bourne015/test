@@ -112,7 +112,7 @@ public class Mascot {
 
 	@Override
 	public String toString() {
-		return "マスコット" + this.id;
+		return "mascot" + this.id;
 	}
 	void tick() {
 	// Update the current IE window the mascot is attached to based on floor/wall checks

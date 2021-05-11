@@ -16,22 +16,22 @@ import com.group_finity.mascot.environment.Wall;
 
 
 /**
- * 枠にくっついて動くアクションの基底クラス.
- * @author Yuki Yamada
+ * Original Author: Yuki Yamada of Group Finity (http://www.group-finity.com/Shimeji/)
+ * Currently developed by Shimeji-ee Group.
  */
 public abstract class BorderedAction extends ActionBase {
 
 	private static final Logger log = Logger.getLogger(BorderedAction.class.getName());
 
-	private static final String PARAMETER_BORDERTYPE = "枠";
+	private static final String PARAMETER_BORDERTYPE = "BorderType";
 
 	public static final String DEFAULT_BORDERTYPE = null;
 
-	public static final String BORDERTYPE_CEILING = "天井";
+	public static final String BORDERTYPE_CEILING = "Ceiling";
 
-	public static final String BORDERTYPE_WALL = "壁";
+	public static final String BORDERTYPE_WALL = "Wall";
 
-	public static final String BORDERTYPE_FLOOR = "地面";
+	public static final String BORDERTYPE_FLOOR = "Floor";
 
 	private Border border;
 

@@ -12,29 +12,30 @@ import com.group_finity.mascot.exception.VariableException;
 import com.group_finity.mascot.script.VariableMap;
 
 /**
- * 落ちるアクション.
+ * Original Author: Yuki Yamada of Group Finity (http://www.group-finity.com/Shimeji/)
+ * Currently developed by Shimeji-ee Group.
  */
 public class Fall extends ActionBase {
 
 	private static final Logger log = Logger.getLogger(Fall.class.getName());
 
-	public static final String PARAMETER_INITIALVX = "初速X";
+	public static final String PARAMETER_INITIALVX = "InitialVX";
 
 	private static final int DEFAULT_INITIALVX = 0;
 
-	private static final String PARAMETER_INITIALVY = "初速Y";
+	private static final String PARAMETER_INITIALVY = "InitialVY";
 
 	private static final int DEFAULT_INITIALVY = 0;
 
-	public static final String PARAMETER_REGISTANCEX = "空気抵抗X";
+	public static final String PARAMETER_REGISTANCEX = "RegistanceX";
 
 	private static final double DEFAULT_REGISTANCEX = 0.05;
 
-	public static final String PARAMETER_REGISTANCEY = "空気抵抗Y";
+	public static final String PARAMETER_REGISTANCEY = "RegistanceY";
 
 	private static final double DEFAULT_REGISTANCEY = 0.1;
 
-	public static final String PARAMETER_GRAVITY = "重力";
+	public static final String PARAMETER_GRAVITY = "Gravity";
 
 	private static final double DEFAULT_GRAVITY = 2;
 
