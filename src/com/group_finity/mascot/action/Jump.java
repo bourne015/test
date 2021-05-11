@@ -11,21 +11,23 @@ import com.group_finity.mascot.script.VariableMap;
 
 
 /**
- * ジャンプするアクション.
+ * Original Author: Yuki Yamada of Group Finity (http://www.group-finity.com/Shimeji/)
+ * Currently developed by Shimeji-ee Group.
  */
 public class Jump extends ActionBase {
 
 	private static final Logger log = Logger.getLogger(Jump.class.getName());
 
-	public static final String PARAMETER_TARGETX = "目的地X";
-	
+	public static final String PARAMETER_TARGETX = "TargetX";
+
 	private static final int DEFAULT_PARAMETERX = 0;
-	
-	public static final String PARAMETER_TARGETY = "目的地Y";
-	
+
+	public static final String PARAMETER_TARGETY = "TargetY";
+
 	private static final int DEFAULT_PARAMETERY = 0;
 
-	public static final String PARAMETER_VELOCITY = "速度";
+	//An Action Attribute is already named Velocity
+	public static final String PARAMETER_VELOCITY = "VelocityParam";
 
 	private static final double DEFAULT_VELOCITY = 20.0;
 

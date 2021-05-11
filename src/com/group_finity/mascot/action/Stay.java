@@ -10,8 +10,8 @@ import com.group_finity.mascot.exception.VariableException;
 import com.group_finity.mascot.script.VariableMap;
 
 /**
- * 移動しないアクション.
- * @author Yuki Yamada
+ * Original Author: Yuki Yamada of Group Finity (http://www.group-finity.com/Shimeji/)
+ * Currently developed by Shimeji-ee Group.
  */
 public class Stay extends BorderedAction {
 
@@ -28,8 +28,7 @@ public class Stay extends BorderedAction {
 		super.tick();
 
 		if ((getBorder() != null) && !getBorder().isOn(getMascot().getAnchor())) {
-			// 地面から離れてしまった
-			log.log(Level.INFO, "枠を見失った({0},{1})", new Object[] { getMascot(), this });
+			log.log(Level.INFO, "Lost Ground ({0},{1})", new Object[] { getMascot(), this });
 			throw new LostGroundException();
 		}
 

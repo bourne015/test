@@ -18,15 +18,15 @@ public class ThrowIE extends Animate {
 
 	private static final Logger log = Logger.getLogger(ThrowIE.class.getName());
 
-	public static final String PARAMETER_INITIALVX = "初速X";
+	public static final String PARAMETER_INITIALVX = "InitialVX";
 
 	private static final int DEFAULT_INITIALVX = 32;
 
-	public static final String PARAMETER_INITIALVY = "初速Y";
+	public static final String PARAMETER_INITIALVY = "InitialVY";
 
 	private static final int DEFAULT_INITIALVY = -10;
 
-	public static final String PARAMETER_GRAVITY = "重力";
+	public static final String PARAMETER_GRAVITY = "Gravity";
 
 	private static final double DEFAULT_GRAVITY = 0.5;
 

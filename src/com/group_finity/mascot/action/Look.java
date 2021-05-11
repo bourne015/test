@@ -6,14 +6,14 @@ import com.group_finity.mascot.exception.VariableException;
 import com.group_finity.mascot.script.VariableMap;
 
 /**
- * 振り返るアクション.
- * @author Yuki Yamada
+ * Original Author: Yuki Yamada of Group Finity (http://www.group-finity.com/Shimeji/)
+ * Currently developed by Shimeji-ee Group.
  */
 public class Look extends InstantAction {
 
 	private static final Logger log = Logger.getLogger(Look.class.getName());
 
-	public static final String PARAMETER_LOOKRIGHT = "右向き";
+	public static final String PARAMETER_LOOKRIGHT = "LookRight";
 
 	public Look(final VariableMap params) {
 		super(params);

@@ -20,11 +20,11 @@ public abstract class ActionBase implements Action {
 
 	private static final Logger log = Logger.getLogger(ActionBase.class.getName());
 
-	public static final String PARAMETER_DURATION = "長さ";
+	public static final String PARAMETER_DURATION = "Duration";
 
 	private static final boolean DEFAULT_CONDITION = true;
 
-	public static final String PARAMETER_CONDITION = "条件";
+	public static final String PARAMETER_CONDITION = "Condition";
 
 	private static final int DEFAULT_DURATION = Integer.MAX_VALUE;
 
@@ -44,9 +44,9 @@ public abstract class ActionBase implements Action {
 	@Override
 	public String toString() {
 		try {
-			return "動作(" + getClass().getSimpleName() + "," + getName() + ")";
+			return "Action (" + getClass().getSimpleName() + "," + getName() + ")";
 		} catch (final VariableException e) {
-			return "動作(" + getClass().getSimpleName() + "," + null + ")";
+			return "Action (" + getClass().getSimpleName() + "," + null + ")";
 		}
 	}
 
@@ -127,7 +127,7 @@ public abstract class ActionBase implements Action {
 	}
 
 	private String getName() throws VariableException {
-		return this.eval("名前", String.class, null);
+		return this.eval("Name", String.class, null);
 	}
 
 	protected Animation getAnimation() throws VariableException {

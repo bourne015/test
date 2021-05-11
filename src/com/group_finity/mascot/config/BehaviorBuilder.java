@@ -38,16 +38,16 @@ public class BehaviorBuilder {
 
 	public BehaviorBuilder(final Configuration configuration, final Entry behaviorNode, final List<String> conditions) {
 		this.configuration = configuration;
-		this.name = behaviorNode.getAttribute("名前");
-		this.actionName = behaviorNode.getAttribute("動作") == null ? getName() : behaviorNode.getAttribute("動作");
-		this.frequency = Integer.parseInt(behaviorNode.getAttribute("頻度"));
+		this.name = behaviorNode.getAttribute("Name");
+		this.actionName = behaviorNode.getAttribute("Action") == null ? getName() : behaviorNode.getAttribute("Action");
+		this.frequency = Integer.parseInt(behaviorNode.getAttribute("Frequency"));
 		this.conditions = new ArrayList<String>(conditions);
-		this.getConditions().add(behaviorNode.getAttribute("条件"));
+		this.getConditions().add(behaviorNode.getAttribute("Condition"));
 
 	// Conversion to multiwindow environment checks
 	// Also set IE throw frequency to 0
 		if (name.contains("投げる")) frequency = 0;
-		if (name.equals("落下する")) frequency = 1;
+		if (name.equals("Fall")) frequency = 1;
 		if (!name.contains("に飛びつく")) {
 			if (conditions != null) {
 				for (int i=0;i<conditions.size();i++) {
@@ -61,45 +61,45 @@ public class BehaviorBuilder {
 		log.log(Level.INFO, "行動読み込み開始({0})", this);
 
 		this.getParams().putAll(behaviorNode.getAttributes());
-		this.getParams().remove("名前");
-		this.getParams().remove("動作");
-		this.getParams().remove("頻度");
-		this.getParams().remove("条件");
+		this.getParams().remove("Name");
+		this.getParams().remove("Action");
+		this.getParams().remove("Frequency");
+		this.getParams().remove("Condition");
 
 		boolean nextAdditive = true;
 
-		for (final Entry nextList : behaviorNode.selectChildren("次の行動リスト")) {
+		for (final Entry nextList : behaviorNode.selectChildren("NextBehaviorList")) {
 
-			log.log(Level.INFO, "次の行動リスト...");
+			log.log(Level.INFO, "Lists the Following Behaviors...");
 
-			nextAdditive = Boolean.parseBoolean(nextList.getAttribute("追加"));
+			nextAdditive = Boolean.parseBoolean(nextList.getAttribute("Add"));
 
 			loadBehaviors(nextList, new ArrayList<String>());
 		}
 
 		this.nextAdditive = nextAdditive;
 
-		log.log(Level.INFO, "行動読み込み完了({0})", this);
+		log.log(Level.INFO, "Behaviors have finished loading({0})", this);
 
 	}
 
 	@Override
 	public String toString() {
-		return "行動(" + getName() + "," + getFrequency() + "," + getActionName() + ")";
+		return "Behavior(" + getName() + "," + getFrequency() + "," + getActionName() + ")";
 	}
 
 	private void loadBehaviors(final Entry list, final List<String> conditions) {
 
 		for (final Entry node : list.getChildren()) {
 
-			if (node.getName().equals("条件")) {
+			if (node.getName().equals("Condition")) {
 
 				final List<String> newConditions = new ArrayList<String>(conditions);
-				newConditions.add(node.getAttribute("条件"));
+				newConditions.add(node.getAttribute("Condition"));
 
 				loadBehaviors(node, newConditions);
 
-			} else if (node.getName().equals("行動参照")) {
+			} else if (node.getName().equals("BehaviorReference")) {
 				final BehaviorBuilder behavior = new BehaviorBuilder(getConfiguration(), node, conditions);
 				getNextBehaviorBuilders().add(behavior);
 			}
@@ -109,7 +109,8 @@ public class BehaviorBuilder {
 	public void validate() throws ConfigurationException {
 
 		if ( !getConfiguration().getActionBuilders().containsKey(getActionName()) ) {
-			throw new ConfigurationException("対応する動作が存在しません("+this+")");
+			log.log(Level.SEVERE, "There is no corresponding action(" + this + ")");			
+			throw new ConfigurationException("There is no corresponding action("+this+")");
 		}
 	}
 
@@ -120,7 +121,8 @@ public class BehaviorBuilder {
 						getConfiguration().buildAction(getActionName(),
 								getParams()), getConfiguration() );
 		} catch (final ActionInstantiationException e) {
-			throw new BehaviorInstantiationException("対応する動作の初期化に失敗しました("+this+")", e);
+			log.log(Level.SEVERE, "Failed to initialize the corresponding action("+this+")");				
+			throw new BehaviorInstantiationException("Failed to initialize the corresponding action("+this+")", e);
 		}
 	}
 

@@ -11,18 +11,18 @@ import com.group_finity.mascot.exception.VariableException;
 import com.group_finity.mascot.script.VariableMap;
 
 /**
- * 移動するアクション.
- * @author Yuki Yamada
+ * Original Author: Yuki Yamada of Group Finity (http://www.group-finity.com/Shimeji/)
+ * Currently developed by Shimeji-ee Group.
  */
 public class Move extends BorderedAction {
 
 	private static final Logger log = Logger.getLogger(Move.class.getName());
 
-	private static final String PARAMETER_TARGETX = "目的地X";
+	private static final String PARAMETER_TARGETX = "TargetX";
 
 	private static final int DEFAULT_TARGETX = Integer.MAX_VALUE;
 
-	private static final String PARAMETER_TARGETY = "目的地Y";
+	private static final String PARAMETER_TARGETY = "TargetY";
 
 	private static final int DEFAULT_TARGETY = Integer.MAX_VALUE;
 
@@ -62,8 +62,7 @@ public class Move extends BorderedAction {
 		super.tick();
 
 		if ((getBorder() != null) && !getBorder().isOn(getMascot().getAnchor())) {
-			// 壁から離れてしまった
-			log.log(Level.INFO, "枠を見失った({0},{1})", new Object[] { getMascot(), this });
+			log.log(Level.INFO, "Lost Ground ({0},{1})", new Object[] { getMascot(), this });
 			throw new LostGroundException();
 		}
 

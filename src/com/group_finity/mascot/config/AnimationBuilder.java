@@ -28,7 +28,7 @@ public class AnimationBuilder {
 	private int tot = 0;
 
 	public AnimationBuilder(final Entry animationNode) throws IOException {
-		this.condition = animationNode.getAttribute("条件") == null ? "true" : animationNode.getAttribute("条件");
+		this.condition = animationNode.getAttribute("Condition") == null ? "true" : animationNode.getAttribute("Condition");
 
 		log.log(Level.INFO, "アニメーション読み込み開始");
 
@@ -42,10 +42,10 @@ public class AnimationBuilder {
 
 	private Pose loadPose(final Entry frameNode) throws IOException {
 
-		final String imageText = frameNode.getAttribute("画像");
-		final String anchorText = frameNode.getAttribute("基準座標");
-		final String moveText = frameNode.getAttribute("移動速度");
-		final String durationText = frameNode.getAttribute("長さ");
+		final String imageText = frameNode.getAttribute("Image");
+		final String anchorText = frameNode.getAttribute("ImageAnchor");
+		final String moveText = frameNode.getAttribute("Velocity");
+		final String durationText = frameNode.getAttribute("Duration");
 
 		final String[] anchorCoordinates = anchorText.split(",");
 		final Point anchor = new Point(Integer.parseInt(anchorCoordinates[0]), Integer.parseInt(anchorCoordinates[1]));
@@ -116,7 +116,7 @@ public class AnimationBuilder {
 		try {
 			return new Animation(Variable.parse(this.getCondition()), this.getPoses().toArray(new Pose[0]));
 		} catch (final VariableException e) {
-			throw new AnimationInstantiationException("条件の評価に失敗しました", e);
+			throw new AnimationInstantiationException("Failed to evaluate the condition", e);
 		}
 	}
 

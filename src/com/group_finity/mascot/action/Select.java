@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 import com.group_finity.mascot.script.VariableMap;
 
 /**
- * 複数のアクションから条件に一致する一つだけを実行するアクション.
- * @author Yuki Yamada
+ * Original Author: Yuki Yamada of Group Finity (http://www.group-finity.com/Shimeji/)
+ * Currently developed by Shimeji-ee Group.
  */
 public class Select extends ComplexAction {
 
