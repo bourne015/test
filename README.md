@@ -83,14 +83,3 @@ This project inherits the ZLIB/LIBPNG license of the original [program](http://w
 The included [Java Native Access](http://github.com/twall/jna) library is licensed under the LGPL. [The Mozilla Rhino Javascript Engine](http://www.mozilla.org/rhino)
 is licensed under the Mozilla Public License.
 
-add test
-add in main
-add 2 in main
-add 1 in main
-add 2 in main
-add new4 in main
-add new in main
-add new2 in main
-add new3 in main
-add new5 in main
-add new6 in main
