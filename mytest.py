@@ -1,5 +1,4 @@
-"test
-"
+# test
 def test():
     "
     test
