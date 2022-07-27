@@ -1,7 +1,6 @@
 "
 test file
 "
-
 def test():
     "
     test
