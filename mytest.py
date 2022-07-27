@@ -1,5 +1,4 @@
-"
-test file
+"test
 "
 def test():
     "
