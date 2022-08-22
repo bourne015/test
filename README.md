@@ -84,3 +84,5 @@ The included [Java Native Access](http://github.com/twall/jna) library is licens
 is licensed under the Mozilla Public License.
 
 test1
+test2
+test3
