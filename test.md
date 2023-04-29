@@ -1,7 +1,1 @@
-According to the OS system, select the corresponding version to install. 
-|OS System|ROS2|OpenVINO|RealSense SDK|
-|:---: |:---:|:---:|:---:|
-|Ubuntu 20.04|[ROS_foxy_install_guide](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html)|[OpenVINO_install_guide](https://docs.openvino.ai/2022.3/openvino_docs_install_guides_installing_openvino_apt.html#doxid-openvino-docs-install-guides-installing-openvino-apt)|[RealSense_install_guide](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md)|
-|Ubuntu 20.04|[ROS_galactic_install_guide](https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html)|[OpenVINO_install_guide](https://docs.openvino.ai/2022.3/openvino_docs_install_guides_installing_openvino_apt.html#doxid-openvino-docs-install-guides-installing-openvino-apt)|[RealSense_install_guide](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md)|
-|Ubuntu 22.04|[ROS_humble_install_guide](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html)|[OpenVINO_install_guide](https://docs.openvino.ai/2022.3/openvino_docs_install_guides_installing_openvino_apt.html#doxid-openvino-docs-install-guides-installing-openvino-apt)|[RealSense_install_guide](https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md)|
-|Windows10 (WIP)|[ROS_humble_install_guide](https://docs.ros.org/en/humble/Installation/Windows-Install-Binary.html)|[OpenVINO_install_guide](https://docs.openvino.ai/latest/openvino_docs_install_guides_installing_openvino_windows_header.html#doxid-openvino-docs-install-guides-installing-openvino-windows-header)|[RealSense_install_guide](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_windows.md)|
+123
